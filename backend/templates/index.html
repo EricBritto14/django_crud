@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>...</h1>
+    <!-- {% chave com porcentagem, seria para comandos, como o for por exemplo, e chave com {{ seria para variáveis  -->
+    <!--Usando abaixo a linguagem de templates chamada Dinder -->
+    {% for pessoa in pessoas%} <!-- Criando um for na linguagem do django Dinder, para conseguir acessar as coisas e tudo. for pessoa(variavel qlqr) in pessoas(pessoas foi o nome que eu mandei lá de views) --> 
+        <li> {{pessoa.id }} - {{pessoa.nome}} - {{pessoa.email}}
+            <a href="{% url 'editar' pessoa.id %}">Editar</a>
+            <a href="{% url 'delete' pessoa.id %}">Deletar</a>
+        </li>
+    {% endfor %} <!-- Necessário para fechar o for criado lá no começo -->
+
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %} <!--Isso aqui é padrão para POST com form, é como se fosse um token de segurança para o programa saber que não foi hackeado e ta funcionando certinho, sem isso da erro-->
+        <input type="text" name="nome"> <!--Inputtype para o cara colocar os valores que vão ser salvos no banco-->
+        <input type="text" name="email">
+        <button type="submit">Salvar</button>
+    </form>
+
+</body>
+</html>
